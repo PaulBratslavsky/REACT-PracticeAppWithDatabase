@@ -54,7 +54,7 @@ const News = ({start, amount}) => {
     return (
         <NewsContainer>
             { isLoadingState ?   <Loading /> : listArticleItems(articlesState) }
-            <Button variant="danger" block onClick={nextSlides} >LOAD MORE</Button>
+            <Button variant="danger" block onClick={nextSlides} >LOAD MORE NEWS</Button>
         </NewsContainer>
         
     );    

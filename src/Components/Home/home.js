@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <React.Fragment>
             <Slider start={0} end={5} />
-            <News start={5} amount={5} />
+            <News start={5} amount={3} />
         </React.Fragment>
     )
 }

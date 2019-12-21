@@ -13,11 +13,9 @@ const Header = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <LinkContainer to="/home"><Nav.Link>Home</Nav.Link></LinkContainer>
-                    <LinkContainer to="/about"><Nav.Link>About</Nav.Link></LinkContainer>
-                    <LinkContainer to="/contact"><Nav.Link>Contact</Nav.Link></LinkContainer>
-                    <LinkContainer to="/blog"><Nav.Link>Blog</Nav.Link></LinkContainer>
-
+                    <LinkContainer to="/"><Nav.Link>Home</Nav.Link></LinkContainer>
+                    <LinkContainer to="/new"><Nav.Link>News</Nav.Link></LinkContainer>
+                    <LinkContainer to="/videos"><Nav.Link>Videos</Nav.Link></LinkContainer>
                 </Nav>
 
                  <Nav>
