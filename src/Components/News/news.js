@@ -1,17 +1,19 @@
 import React from 'react';
-// import { Carousel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { database } from '../../API/Axios';
 import Loading from '../Loading/loading';
+import Card from './card';
 
 const NewsContainer = styled.div`
     height: 50vh;
     min-height: 350px;
+    margin: 10px;
 `;
 
 const News = ({start, amount}) => {
 
-    const [ articlesState, setArticlesState ] = React.useState(null);
+    const [ articlesState, setArticlesState ] = React.useState([]);
     const [ isLoadingState, setIsLoadingState ] = React.useState(true);
     const [ startAndEndState, setStartEndState ] = React.useState({ start: start, end: start + amount })
 
@@ -21,7 +23,7 @@ const News = ({start, amount}) => {
         const { start, end } = startAndEndState;
         database.get(`/articles?_start=${start}&_end=${end}`)
             .then( ( response => {
-                setArticlesState(response.data);
+                setArticlesState([...articlesState, ...response.data]);
                 setIsLoadingState(false);
             } ))
             .catch( ( err => console.error(err) ))
@@ -44,18 +46,15 @@ const News = ({start, amount}) => {
 
     function listArticleItems(itemsList) {
         
-        return itemsList.map( item => (
-            <div key={item.id} >
-                <h2>{item.id}</h2>
-            </div>
-
+        return itemsList.map( item => ( 
+            <Card key={item.id} data={item} />
         ));
     }
 
     return (
         <NewsContainer>
             { isLoadingState ?   <Loading /> : listArticleItems(articlesState) }
-            <button onClick={nextSlides} >Click ME</button>
+            <Button variant="danger" block onClick={nextSlides} >LOAD MORE</Button>
         </NewsContainer>
         
     );    

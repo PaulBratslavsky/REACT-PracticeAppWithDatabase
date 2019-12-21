@@ -3,10 +3,14 @@ import { Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
 import { database } from '../../API/Axios';
 import Loading from '../Loading/loading';
+import { Redirect, withRouter } from 'react-router-dom';
 
 const SliderContainer = styled.div`
     height: calc(40vh - 56px); 
     min-height: 350px;
+    margin: 10px;
+    border-radius: 15px; 
+    overflow: hidden;
 `;
 
 const SliderImage = styled.img`
@@ -25,11 +29,12 @@ const SliderImageOverlay = styled.div`
     height: 100%;
     width: 100%;
     background: #0d0c22;
-    opacity: 0.5;
+    background-image: linear-gradient( #0d0c22, #fd295f );
+    opacity: 0.6;
 
 `;
 
-const Slider = ({start, end}) => {
+const Slider = ({start, end, history }) => {
 
     const [index, setIndex] = React.useState(0);
     const [direction, setDirection] = React.useState(null);
@@ -59,17 +64,17 @@ const Slider = ({start, end}) => {
 
     function listSliderItems(itemsList) {
         
-        return itemsList.map( item => (
-            <Carousel.Item key={item.id} style={{ height: 'calc(40vh - 56px)', minHeight: '350px'}} >
+        return itemsList.map( data => (
+            <Carousel.Item onClick={ () => history.push(`/articles/${data.id}`) } key={data.id} style={{ height: 'calc(40vh - 56px)', minHeight: '350px'}} >
                 <SliderImageOverlay />
-                <SliderImage style={{objectFit: 'cover', height: '100%'}}
-                
-                src={`./images/articles/${item.image}`}
-                alt={item.title}
+                <SliderImage 
+                    style={{objectFit: 'cover', height: '100%'}}
+                    src={`./images/articles/${data.image}`}
+                    alt={data.title}
                 />
                 <Carousel.Caption>
-                <h3>{item.title}</h3>
-                <p>{item.author}</p>
+                <h3>{data.title}</h3>
+                <p>{data.author}</p>
                 </Carousel.Caption>
             </Carousel.Item>
 
@@ -89,4 +94,4 @@ const Slider = ({start, end}) => {
     );    
 }
 
-export default Slider
+export default withRouter(Slider);
