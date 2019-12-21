@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Header = (props) => {
     
     return (
-        <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar style={{background: '#0d0c22'}} sticky="top" collapseOnSelect expand="lg"  variant="dark">
             <Link to="/" className="navbar-brand"><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}><AiFillFire /><span style={{marginLeft: '0.25rem'}} >JITS</span></div></Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

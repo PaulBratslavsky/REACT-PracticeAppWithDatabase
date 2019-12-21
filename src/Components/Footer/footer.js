@@ -4,7 +4,7 @@ import { CURRENT_YEAR, NAME } from '../../config';
 
 const FooterDiv = styled.footer`
     height: 40px;
-    background: black;
+    background: #0d0c22;
     display: flex;
     justify-content: center;
     align-items: center;

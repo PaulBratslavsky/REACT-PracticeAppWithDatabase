@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const LayoutBackgroundDiv = styled.div`
-    background: gray;
+    background: #1a1842;
     height: 100%;
 `
 
