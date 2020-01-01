@@ -3,17 +3,16 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { database } from '../../API/Axios';
 import Loading from '../Loading/loading';
-import Card from './card';
+import VidoeCard from './videocard';
 
-const NewsContainer = styled.div`
+const VideosContainer = styled.div`
     min-height: 350px;
     margin: 10px;
-    margin-bottom: 1rem;
 `;
 
-const News = ({start, amount}) => {
+const Videos = ({start, amount}) => {
 
-    const [ articlesState, setArticlesState ] = React.useState([]);
+    const [ videosState, setVideosState ] = React.useState([]);
     const [ teamsState, setTeamsState ] = React.useState([]);
 
     const [ isLoadingState, setIsLoadingState ] = React.useState(true);
@@ -24,9 +23,9 @@ const News = ({start, amount}) => {
 
         const { start, end } = startAndEndState;
 
-        database.get(`/articles?_start=${start}&_end=${end}`)
+        database.get(`/videos?_start=${start}&_end=${end}`)
             .then( response => {
-                setArticlesState([...articlesState, ...response.data]);
+                setVideosState([...videosState, ...response.data]);
                 setIsLoadingState(false);
             })
             .catch( ( err => console.error(err) ) );
@@ -58,23 +57,23 @@ const News = ({start, amount}) => {
         });
     }
 
-    function listArticleItems(itemsList) {
+    function listVideoItems(itemsList) {
         
         return itemsList.map( item => ( 
-            <Card key={item.id} data={item} teams={teamsState} />
+            <VidoeCard key={item.id} data={item} teams={teamsState} />
         ));
     }
 
-    console.log(teamsState, "TEAMS THAT I NEED");
+    console.log(videosState, "VIDEPS THAT I NEED");
 
     return (
-        <NewsContainer>
-            { isLoadingState ?   <Loading /> : listArticleItems(articlesState) }
-            <Button variant="danger" block onClick={nextSlides} >LOAD MORE NEWS</Button>
-        </NewsContainer>
+        <VideosContainer>
+            { isLoadingState ?   <Loading /> : listVideoItems(videosState) }
+            <Button variant="danger" block onClick={nextSlides} >LOAD MORE VIDEOS</Button>
+        </VideosContainer>
         
     );    
 
 }
 
-export default News
+export default Videos;

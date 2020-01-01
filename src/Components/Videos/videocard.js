@@ -13,7 +13,7 @@ const Image = styled.img`
 
 const CardContainer = styled.div`
     background: #0c0b22;
-    height: 120px;
+    height: 140px;
     margin: 15px 0;
     border-radius: 5px; 
     overflow: hidden;
@@ -53,12 +53,20 @@ const CardContent = styled.div`
     }
 `;
 
+const TeamTags = styled.span`
+    background: orange;
+    padding: 0.125rem 0.35rem;
+    color: white !important;
+    margin-right: 0.25rem;
+    border-radius: 3px;
+`;
 
 
 
 
 
-const Card = ({data, teams}) => {
+
+const VideoCard = ({data, teams}) => {
 
     console.log('DATA FOR CARDS', data);
 
@@ -68,12 +76,16 @@ const Card = ({data, teams}) => {
         return shortText;
     }
 
+    function showTeamTags(tags) {
+        return tags.map( tag => (<TeamTags>{tag}</TeamTags>) );
+    }
+
     return (
-        <Link style={{ textDecoration: 'none' }} to={`./articles/${data.id}`} ><CardContainer>
+        <Link style={{ textDecoration: 'none' }} to={`./videos/${data.id}`} ><CardContainer>
             <CardImage>
                 <Image 
                     style={{objectFit: 'cover', height: '100%'}}
-                    src={`./images/articles/${data.image}`}
+                    src={`./images/videos/${data.image}`}
                     alt={data.title}
                 />
             </CardImage>
@@ -82,12 +94,11 @@ const Card = ({data, teams}) => {
                     <CardInfo teams={teams} currentTeam={data.team}/>
                     {console.log(data.team, "CURRENT")}
                     <h2>{getExcerpt(data.title, 35)}</h2>
-                    <span>{data.author} | {data.date}</span>
+                    {showTeamTags(data.tags)}
                 </div>
             </CardContent>
         </CardContainer></Link>
     )
 }
 
-export default Card;
-
+export default VideoCard;
